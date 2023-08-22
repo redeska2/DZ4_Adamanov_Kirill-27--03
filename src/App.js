@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
 
-
 function App() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -10,9 +9,15 @@ function App() {
     surname: '',
   });
 
+  const [showSubmittedData, setShowSubmittedData] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = () => {
+    setShowSubmittedData(true);
   };
 
   return (
@@ -20,56 +25,56 @@ function App() {
       <div className="inputs">
         <div className="input-container">
           <input
-            placeholder="Enter your full name"
+            placeholder="Введите ваше полное имя"
             className="input"
             type="text"
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
           />
-          <p className="duplicate-value">{formData.fullName}</p>
+          {showSubmittedData && <p className="duplicate-value">Полное имя: {formData.fullName}</p>}
         </div>
 
         <div className="input-container">
           <input
-            placeholder="Enter your phone number"
+            placeholder="Введите номер телефона"
             className="input"
             type="tel"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
           />
-          <p className="duplicate-value">{formData.phoneNumber}</p>
+          {showSubmittedData && <p className="duplicate-value">Номер телефона: {formData.phoneNumber}</p>}
         </div>
 
         <div className="input-container">
           <input
-            placeholder="Enter your email"
+            placeholder="Введите email"
             className="input"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
           />
-          <p className="duplicate-value">{formData.email}</p>
+          {showSubmittedData && <p className="duplicate-value">Email: {formData.email}</p>}
         </div>
 
         <div className="input-container">
           <input
-            placeholder="Enter your surname"
+            placeholder="Введите фамилию"
             className="input"
             type="text"
             name="surname"
             value={formData.surname}
             onChange={handleChange}
           />
-          <p className="div-cate-value">{formData.surname}</p>
+          {showSubmittedData && <p className="duplicate-value">Фамилия: {formData.surname}</p>}
         </div>
       </div>
 
-      <button>Submit</button>
+      <button onClick={handleSubmit}>Отправить</button>
     </div>
   );
 }
- 
+
 export default App;
